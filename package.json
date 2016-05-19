@@ -4,7 +4,7 @@
   "description": "A regular day in the zombie garden",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.10.1",
@@ -16,6 +16,7 @@
     "hbs": "~2.8.0",
     "method-override": "^2.3.1",
     "morgan": "~1.5.1",
+    "mysql": "^2.10.2",
     "serve-favicon": "~2.2.0"
   }
 }

@@ -5,7 +5,6 @@ var router = express.Router();
 
 /* GET lista de pessoas. */
 router.get('/', function(req, res, next) {
-
   db.query({
     sql: 'SELECT * FROM person LEFT OUTER JOIN zombie ON eatenBy = zombie.id',
     nestTables: true
@@ -42,11 +41,25 @@ router.get('/new/', function(req, res) {
   res.render('newPerson');
 });
 
-
 /* POST registra uma nova pessoa */
-// IMPLEMENTAR AQUI
+router.post('/', function(req, res) {
+  console.log("Olá");
+  db.query('INSERT INTO person (name) VALUES (' + db.escape(req.body.name) + ')',
+    function(err, result) {
+      if (err) { res.send(404, 'Não foi possível adicionar pessoa'); }
+      else { res.redirect('/people/'); }
+  })
+});
 
 /* DELETE uma pessoa */
-// IMPLEMENTAR AQUI
+router.delete('/:id', function(req, res) {
+  var id = db.escape(req.params.id);
+  var query = 'DELETE FROM person WHERE id = ' + id;
+
+  db.query(query, function(err, result) {
+    if (err) { res.send(401, 'Pessoa inexistente'); }
+    else { res.redirect('/people/'); }
+  })
+});
 
 module.exports = router;
